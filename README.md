@@ -1,2 +1,2 @@
-# discord bot template
+# Discord Bot Template
  
