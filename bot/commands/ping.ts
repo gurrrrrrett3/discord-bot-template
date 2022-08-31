@@ -1,13 +1,10 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
+import SlashCommandBuilder from "../loaders/objects/customSlashCommandBuilder";
 
-const Command = {
-    enabled: true,
-    builder: new SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Pong!'),
-    handler: async (interaction: ChatInputCommandInteraction) => {
-        interaction.reply('Pong!')
-    }
-}
+const Command = new SlashCommandBuilder()
+  .setName("ping")
+  .setDescription("Pong!")
+  .setFunction(async (interaction) => {
+    interaction.reply("Pong!");
+  });
 
 export default Command;
