@@ -3,8 +3,14 @@ import {
   ChatInputCommandInteraction,
   LocaleString,
   LocalizationMap,
+  SlashCommandAttachmentOption,
+  SlashCommandBooleanOption,
+  SlashCommandChannelOption,
+  SlashCommandMentionableOption,
+  SlashCommandRoleOption,
   SlashCommandStringOption,
   SlashCommandSubcommandBuilder,
+  SlashCommandUserOption,
 } from "discord.js";
 import CustomSlashCommandIntegerOption from "./customSlashCommandIntegerOption";
 import CustomSlashCommandNumberOption from "./customSlashCommandNumberOption";
@@ -63,15 +69,61 @@ export default class CustomSlashCommandSubcommandBuilder {
     return this;
   }
 
-  // commands that we don't need to change
-  addAttachmentOption = this._builder.addAttachmentOption.bind(this._builder);
-  addBooleanOption = this._builder.addBooleanOption.bind(this._builder);
-  addChannelOption = this._builder.addChannelOption.bind(this._builder);
-  addMentionableOption = this._builder.addMentionableOption.bind(this._builder);
-  addRoleOption = this._builder.addRoleOption.bind(this._builder);
-  addUserOption = this._builder.addUserOption.bind(this._builder);
+  addAttachmentOption(
+    callback: (option: SlashCommandAttachmentOption) => SlashCommandAttachmentOption | undefined
+  ): this {
+    const opt = new SlashCommandAttachmentOption();
+    let res = callback(opt);
+    res = res || opt;
+    this._builder.addAttachmentOption(res);
+    return this;
+  }
 
-  // commands that we need to change
+  addBooleanOption(
+    callback: (option: SlashCommandBooleanOption) => SlashCommandBooleanOption | undefined
+  ): this {
+    const opt = new SlashCommandBooleanOption();
+    let res = callback(opt);
+    res = res || opt;
+    this._builder.addBooleanOption(res);
+    return this;
+  }
+
+  addChannelOption(
+    callback: (option: SlashCommandChannelOption) => SlashCommandChannelOption | undefined
+  ): this {
+    const opt = new SlashCommandChannelOption();
+    let res = callback(opt);
+    res = res || opt;
+    this._builder.addChannelOption(res);
+    return this;
+  }
+
+  addMentionableOption(
+    callback: (option: SlashCommandMentionableOption) => SlashCommandMentionableOption | undefined
+  ): this {
+    const opt = new SlashCommandMentionableOption();
+    let res = callback(opt);
+    res = res || opt;
+    this._builder.addMentionableOption(res);
+    return this;
+  }
+
+  addRoleOption(callback: (option: SlashCommandRoleOption) => SlashCommandRoleOption | undefined): this {
+    const opt = new SlashCommandRoleOption();
+    let res = callback(opt);
+    res = res || opt;
+    this._builder.addRoleOption(res);
+    return this;
+  }
+
+  addUserOption(callback: (option: SlashCommandUserOption) => SlashCommandUserOption | undefined): this {
+    const opt = new SlashCommandUserOption();
+    let res = callback(opt);
+    res = res || opt;
+    this._builder.addUserOption(res);
+    return this;
+  }
 
   addStringOption(
     callback: (option: CustomSlashCommandStringOption) => CustomSlashCommandStringOption | undefined
