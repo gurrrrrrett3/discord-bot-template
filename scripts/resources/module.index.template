@@ -1,0 +1,15 @@
+import { bot } from "../../..";
+import BaseModule from "../../loaders/base/baseModule";
+import Module from "../../loaders/base/module";
+
+export default class <nameUppercase>Module extends BaseModule implements Module {
+name = "<name>";
+description = "<desc>";
+
+    
+
+    getTestModule(): <nameUppercase>Module {
+        return bot.moduleLoader.getModule("<name>") as <nameUppercase>Module;
+    }
+
+}

@@ -22,6 +22,7 @@ import CustomSlashCommandSubcommandGroupBuilder from "./customSlashCommandSubcom
 export default class CommandBuilder {
   protected enabled: boolean = true;
   private _builder = new SlashCommandBuilder();
+  private _module = "";
   private _customOptions: (
     | CustomSlashCommandStringOption
     | CustomSlashCommandIntegerOption
@@ -193,6 +194,18 @@ export default class CommandBuilder {
 
   getName(): string {
     return this._builder.name;
+  }
+
+  getType(): "COMMAND" {
+    return "COMMAND";
+  }
+
+  setModule(module: string) {
+    this._module = module
+  }
+
+  isChatInputCommandHandler(): this is CommandBuilder {
+    return true;
   }
 
   run(interaction: ChatInputCommandInteraction): Promise<void> {

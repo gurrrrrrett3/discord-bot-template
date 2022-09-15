@@ -7,12 +7,12 @@ import ModalManager from "./loaders/managers/modalManager";
 
 export default class Bot {
 
-    public moduleLoader: ModuleLoader
-    public commandLoader: CommandLoader
+    commandLoader: CommandLoader
+    moduleLoader: ModuleLoader
 
-    public buttonManager: ButtonManager
-    public selectMenuManager: SelectMenuManager
-    public modalManager: ModalManager
+    buttonManager: ButtonManager
+    selectMenuManager: SelectMenuManager
+    modalManager: ModalManager
   
   constructor(public client: Client) {
     this.client
@@ -20,8 +20,9 @@ export default class Bot {
         console.info(`Logged in as ${this.client.user?.tag}`);
 
       })
-    this.moduleLoader = new ModuleLoader(this);
+      
     this.commandLoader = new CommandLoader(this.client);
+    this.moduleLoader = new ModuleLoader(this);
     
     this.buttonManager = new ButtonManager(this.client);
     this.selectMenuManager = new SelectMenuManager(this.client);
