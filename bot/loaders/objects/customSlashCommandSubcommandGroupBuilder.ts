@@ -9,7 +9,7 @@ import {
 import CustomSlashCommandIntegerOption from "./customSlashCommandIntegerOption";
 import CustomSlashCommandNumberOption from "./customSlashCommandNumberOption";
 import CustomSlashCommandStringOption from "./customSlashCommandStringOption";
-import CustomSlashCommandSubcommandBuilder from "./customSlashCommandSubcommand";
+import CustomSlashCommandSubcommandBuilder from "./customSlashCommandSubcommandBuilder";
 
 export default class CustomSlashCommandSubcommandGroupBuilder {
   protected enabled: boolean = true;
@@ -54,7 +54,7 @@ export default class CustomSlashCommandSubcommandGroupBuilder {
     return this;
   }
 
-  addSubcommandOption(
+  addSubcommand(
     callback: (option: CustomSlashCommandSubcommandBuilder) => CustomSlashCommandSubcommandBuilder | undefined
   ): this {
     const opt = new CustomSlashCommandSubcommandBuilder();
@@ -81,11 +81,8 @@ export default class CustomSlashCommandSubcommandGroupBuilder {
   }
 
   run(interaction: ChatInputCommandInteraction): Promise<void> {
-    const subcommand = interaction.options.data.find(
-      (opt) => opt.type == ApplicationCommandOptionType.Subcommand
-    )
-      ? interaction.options.getSubcommand()
-      : null;
+    const subcommand = interaction.options.getSubcommand();
+
     if (!subcommand) {
       return Promise.resolve();
     }

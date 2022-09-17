@@ -8,7 +8,7 @@ description = "<desc>";
 
     
 
-    getTestModule(): <nameUppercase>Module {
+    get<nameUppercase>Module(): <nameUppercase>Module {
         return bot.moduleLoader.getModule("<name>") as <nameUppercase>Module;
     }
 
