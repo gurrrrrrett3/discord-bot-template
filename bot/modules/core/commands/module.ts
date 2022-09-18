@@ -1,10 +1,12 @@
 import { bot } from "../../../..";
 import chalk from "chalk";
 import SlashCommandBuilder from "../../../loaders/objects/customSlashCommandBuilder";
+import { PermissionFlagsBits } from "discord.js";
 
 const Command = new SlashCommandBuilder()
   .setName("module")
   .setDescription("Manage loaded modules")
+  .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
   .addSubcommandGroup((group) =>
     group
       .setName("list")

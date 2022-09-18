@@ -2,7 +2,7 @@ import { bot } from "../../..";
 import BaseModule from "../../loaders/base/baseModule";
 import Module from "../../loaders/base/module";
 
-export default class <nameUppercase>Module extends BaseModule implements Module {
+export default class <nameUppercase>Module extends Module {
 name = "<name>";
 description = "<desc>";
 
