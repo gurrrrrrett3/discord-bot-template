@@ -89,4 +89,12 @@ export default class CommandLoader {
         return command.run(interaction);
     });
   }
+
+  public unload(commands: CustomCommandBuilder[]) {
+    for (const command of commands) {
+      this.commands.delete(command.getName());
+    }
+
+    this.load(Array.from(this.commands.values()));
+  }
 }

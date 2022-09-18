@@ -15,8 +15,8 @@ import {
 import CustomSlashCommandIntegerOption from "./customSlashCommandIntegerOption";
 import CustomSlashCommandNumberOption from "./customSlashCommandNumberOption";
 import CustomSlashCommandStringOption from "./customSlashCommandStringOption";
-import CustomSlashCommandSubcommandBuilder from "./customSlashCommandSubcommand";
-import CustomSubommandBuilder from "./customSlashCommandSubcommand";
+import CustomSlashCommandSubcommandBuilder from "./customSlashCommandSubcommandBuilder";
+import CustomSubommandBuilder from "./customSlashCommandSubcommandBuilder";
 import CustomSlashCommandSubcommandGroupBuilder from "./customSlashCommandSubcommandGroupBuilder";
 
 export default class CommandBuilder {
@@ -114,7 +114,7 @@ export default class CommandBuilder {
     return this;
   }
 
-  addSubcommandOption(
+  addSubcommand(
     callback: (option: CustomSlashCommandSubcommandBuilder) => CustomSlashCommandSubcommandBuilder | undefined
   ): this {
     const opt = new CustomSlashCommandSubcommandBuilder();
@@ -125,7 +125,7 @@ export default class CommandBuilder {
     return this;
   }
 
-  addSubcommandGroupOption(
+  addSubcommandGroup(
     callback: (
       option: CustomSlashCommandSubcommandGroupBuilder
     ) => CustomSlashCommandSubcommandGroupBuilder | undefined
@@ -210,12 +210,15 @@ export default class CommandBuilder {
     this._module = module
   }
 
+  getModule(): string {
+    return this._module;
+  }
+
   isChatInputCommandHandler(): this is CommandBuilder {
     return true;
   }
 
   run(interaction: ChatInputCommandInteraction): Promise<void> {
-    console.log(interaction.options.data);
     const subcommand = interaction.options.data.find(
       (opt) => opt.type == ApplicationCommandOptionType.Subcommand
     )

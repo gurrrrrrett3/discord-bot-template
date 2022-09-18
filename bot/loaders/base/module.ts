@@ -17,7 +17,7 @@ export default class Module extends BaseModule {
 
     }   
 
-    public async loadCommands(bot: Bot) {
+    public async loadCommands() {
         if (!fs.existsSync(path.resolve(`./dist/bot/modules/${this.name}/commands`))) {
             console.log(`No commands found for module ${this.name}, skipping...`)
             return []
