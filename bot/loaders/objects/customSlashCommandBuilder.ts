@@ -65,6 +65,12 @@ export default class CommandBuilder {
     this._builder.setDescription(description);
     return this;
   }
+
+  setDefaultMemberPermissions(permissions: string | number | bigint | null | undefined) {
+    this._builder.setDefaultMemberPermissions(permissions)
+    return this;
+  }
+
   setDescriptionLocalization(locale: LocaleString, localizedDescription: string | null) {
     this._builder.setDescriptionLocalization(locale, localizedDescription);
     return this;
