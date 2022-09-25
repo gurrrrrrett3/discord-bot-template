@@ -1,22 +1,26 @@
 import Bot from "../../bot";
-import BaseModule from "./baseModule";
-import { BaseModuleType, CustomCommandBuilder } from "../loaderTypes";
+import { CustomCommandBuilder } from "../loaderTypes";
 import fs from "fs"
 import path from "path"
+import { Client } from "discord.js";
+import chalk from "chalk";
 
-export default class Module extends BaseModule implements BaseModuleType {
+export default class Module {
+    private client?: Client
+    private commands: Map<string, CustomCommandBuilder> = new Map();
+
      name: string = ""
      description: string = ""
 
     constructor(bot: Bot) {
-        super(bot);
+        this.client = bot.client;
     }
 
     /**
      * Override this method to run code when the module is loaded
      */
     async onLoad(): Promise<Boolean> {
-        console.log(`Loaded module ${this.name}`);
+        console.log(chalk.bgBlue(`[${this.name}]`), "Loaded", chalk.yellow(this.name), "module");
         return true;
     }
 
@@ -42,5 +46,9 @@ export default class Module extends BaseModule implements BaseModuleType {
         }
 
         return commands;
+    }
+
+    public getCommands() {
+        return this.commands;
     }
 }

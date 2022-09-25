@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import {
   RESTPostAPIApplicationCommandsJSONBody,
   Routes,
@@ -32,7 +33,7 @@ export default class CommandLoader {
     //Collect list of command files
     let commandsToDeploy: RESTPostAPIApplicationCommandsJSONBody[] = [];
 
-    console.log(`Deploying ${commands.length} commands`);
+    console.log(chalk.bgGreen("[CommandLoader]"), "Loading", commands.length, "commands");
 
     //Import off of the commands as modules
     for (const command of commands) {
@@ -51,7 +52,7 @@ export default class CommandLoader {
           body: commandsToDeploy,
         })
         .then(() => {
-          console.log(`${this.commands.size} commands deployed`);
+          console.log(chalk.bgGreen("[CommandLoader]"), "Successfully registered application commands.");
         })
         .catch((err) => {
           console.error(err);
@@ -62,7 +63,7 @@ export default class CommandLoader {
           body: commandsToDeploy,
         })
         .then(() => {
-          console.log(`${this.commands.size} commands deployed`);
+          console.log(chalk.bgGreen("[CommandLoader]"), "Successfully registered application commands.");
         })
         .catch((err) => {
           console.error(err);

@@ -1,12 +1,7 @@
 import Bot from "../bot";
 import CustomMessageContextMenuCommandBuilder from "./objects/CustomMessageContextMenuCommandBuilder";
-import CustomUserContextMenuCommandBuilder from "./objects/CustomUserContextMenuCommandBuilder copy";
+import CustomUserContextMenuCommandBuilder from "./objects/CustomUserContextMenuCommandBuilder";
 import CustomSlashCommandBuilder from "./objects/customSlashCommandBuilder";
-
-
-export class BaseModuleType {
-    constructor(bot: Bot) {}
-}
 
 export class Module {
     name: string;
