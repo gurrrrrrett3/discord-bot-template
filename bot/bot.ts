@@ -4,6 +4,7 @@ import CommandLoader from "./loaders/commandLoader";
 import ButtonManager from "./loaders/managers/buttonManager";
 import SelectMenuManager from "./loaders/managers/selectMenuManager";
 import ModalManager from "./loaders/managers/modalManager";
+import chalk from "chalk";
 
 export default class Bot {
 
@@ -17,7 +18,7 @@ export default class Bot {
   constructor(public client: Client) {
     this.client
       .on("ready", () => {
-        console.info(`Logged in as ${this.client.user?.tag}`);
+        console.info(chalk.bgBlue(`[Discord]`) ,`Logged in as ${chalk.green(this.client.user?.tag)}`);
 
       })
       

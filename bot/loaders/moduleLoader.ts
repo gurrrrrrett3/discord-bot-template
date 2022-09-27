@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import fs from "fs";
 import path from "path";
 import Bot from "../bot";
@@ -29,7 +30,7 @@ export default class ModuleLoader {
       this.addModule(m);
     }
 
-    console.log("Loaded modules: " + this.modules.size);
+    console.log(chalk.bgBlue("[ModuleLoader]"), "Found", this.modules.size, `module${this.modules.size === 1 ? "" : "s"}`);
 
     //load commands on ready
 
@@ -39,6 +40,7 @@ export default class ModuleLoader {
         promises.push(
           new Promise(async (resolve) => {
             const moduleCommands = await module.loadCommands();
+            await module.onLoad();
             resolve(moduleCommands);
           })
         );
