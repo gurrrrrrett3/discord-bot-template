@@ -1,15 +1,21 @@
 import Bot from "../../bot";
-import BaseModule from "./baseModule";
 import { BaseModuleType, CustomCommandBuilder } from "../loaderTypes";
 import fs from "fs"
 import path from "path"
+import { Client } from "discord.js";
 
-export default class Module extends BaseModule implements BaseModuleType {
+export default class Module implements BaseModuleType {
      name: string = ""
      description: string = ""
 
+    private client?: Client
+    private commands: Map<string, CustomCommandBuilder> = new Map();
+
     constructor(bot: Bot) {
-        super(bot);
+        this.client = bot.client;
+        this.client.on("ready", () => {
+            console.info(`Loaded module ${this.constructor.name}`);
+        })
     }
 
     /**
@@ -34,11 +40,16 @@ export default class Module extends BaseModule implements BaseModuleType {
             return []
         }
         const commandFolder = fs.readdirSync(path.resolve(`./dist/bot/modules/${this.name}/commands`));
+        
         let commands: CustomCommandBuilder[] = [];
+        this.commands = new Map();
+
         for (const commandFile of commandFolder) {
             const command = require(path.resolve(`./dist/bot/modules/${this.name}/commands/${commandFile}`)).default as CustomCommandBuilder;
             command.setModule(this.name);            
             commands.push(command);
+
+            this.commands.set(command.getName(), command);
         }
 
         return commands;

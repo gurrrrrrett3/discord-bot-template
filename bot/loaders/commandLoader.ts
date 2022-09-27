@@ -3,14 +3,8 @@ import {
   Routes,
   REST,
   Collection,
-  ChatInputCommandInteraction,
-  SlashCommandBuilder,
   Client,
-  MessageContextMenuCommandInteraction,
-  UserContextMenuCommandInteraction,
 } from "discord.js";
-import fs from "fs";
-import path from "path";
 import { CustomCommandBuilder } from "./loaderTypes";
 import CommandBuilder from "./objects/customSlashCommandBuilder";
 
